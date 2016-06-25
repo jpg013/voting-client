@@ -41,4 +41,18 @@ describe('results', () => {
         Simulate.click(node);
         expect(nextInvoked).to.equal(true);
     });
+
+    it('render the winner when there is one', () => {
+        const pair = List.of('Trainspotting', '28 Days Later');
+        const component = renderIntoDocument(
+            <Results
+              pair={pair}
+              tally={Map()}
+              winner='Trainspotting'>
+            </Results>
+        );
+        const winner = ReactDOM.findDOMNode(component.refs.winner);
+        expect(winner).to.be.ok;
+        expect(winner.textContent).to.contain('Trainspotting');
+    });
 });
